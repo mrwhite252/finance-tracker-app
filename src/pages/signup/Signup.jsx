@@ -1,5 +1,5 @@
 import "./Signup.module.css";
 
 export default function Signup() {
-  return <div></div>;
+  return <div>signup</div>;
 }
