@@ -10,18 +10,18 @@ export const useLogin = () => {
   //   state for clean up function
   const [isCancelled, setIsCancelled] = useState(false);
 
-  const login = async () => {
+  const login = async (email, password) => {
     setError(null);
     setIsPending(true);
 
     // sign the user out
 
     try {
-      await projectAuth.signOut();
+      const res = await projectAuth.signInWithEmailAndPassword(email, password);
 
       // dispatch logout action
 
-      dispatch({ type: "LOGOUT" });
+      dispatch({ type: "LOGIN", payload: res.user });
 
       //   update state
 
@@ -44,5 +44,5 @@ export const useLogin = () => {
     return () => setIsCancelled(true);
   }, []);
 
-  return { logout, error, isPending };
+  return { login, error, isPending };
 };
